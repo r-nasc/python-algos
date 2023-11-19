@@ -83,3 +83,55 @@ def shuffle_sort(arr: list) -> list:
         arr[i], arr[j] = arr[j], arr[i]
     return arr
 
+
+def quick_sort(arr: list) -> list:
+    """Sorts an array using the Quick sort algorithm.
+
+    Time complexity: O(n log n) avg and O(n^2) worst case. Memory: O(log n)
+
+    The method selects a pivot element from the array and partitions the other
+    elements into two sub-arrays, according to whether they are less than or greater
+    than the pivot. The sub-arrays are then recursively sorted.
+    """
+    if len(arr) <= 1:
+        return arr
+
+    pivot = arr[0]
+    less = [x for x in arr[1:] if x <= pivot]
+    greater = [x for x in arr[1:] if x > pivot]
+    return quick_sort(less) + [pivot] + quick_sort(greater)
+
+
+def merge_sort(arr: list) -> list:
+    """Sorts an array using the Merge sort algorithm.
+
+    Time complexity: O(n log n) avg and worst case. Memory: O(n)
+
+    The method divides the array into two halves, sorts them recursively and then
+    merges the two sorted halves. The merge operation is done by comparing the
+    first element of each half and appending the smaller one to the result array.
+    """
+
+    def _combine(left, right):
+        result = []
+        i = j = 0
+
+        while i < len(left) and j < len(right):
+            if left[i] < right[j]:
+                result.append(left[i])
+                i += 1
+            else:
+                result.append(right[j])
+                j += 1
+
+        result.extend(left[i:])
+        result.extend(right[j:])
+        return result
+
+    if len(arr) <= 1:
+        return arr
+
+    mid = len(arr) // 2
+    left = merge_sort(arr[:mid])
+    right = merge_sort(arr[mid:])
+    return _combine(left, right)

@@ -1,6 +1,12 @@
 """Unit testing for sorting algorithms"""
 import pytest
-from src.sorting import shell_sort, insertion_sort, selection_sort
+from src.sorting import (
+    shell_sort,
+    insertion_sort,
+    selection_sort,
+    merge_sort,
+    quick_sort,
+)
 
 
 expected_values = [
@@ -43,3 +49,15 @@ def test_insertion_sort(test_input, expected):
 def test_selection_sort(test_input, expected):
     """selection_sort unit testing"""
     assert selection_sort(test_input) == expected
+
+
+@pytest.mark.parametrize("test_input,expected", expected_values)
+def test_quick_sort(test_input, expected):
+    """quick_sort unit testing"""
+    assert quick_sort(test_input) == expected
+
+
+@pytest.mark.parametrize("test_input,expected", expected_values)
+def test_merge_sort(test_input, expected):
+    """merge_sort unit testing"""
+    assert merge_sort(test_input) == expected
