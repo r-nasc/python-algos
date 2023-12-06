@@ -6,6 +6,7 @@ from src.sorting import (
     selection_sort,
     merge_sort,
     quick_sort,
+    heap_sort,
 )
 
 
@@ -61,3 +62,9 @@ def test_quick_sort(test_input, expected):
 def test_merge_sort(test_input, expected):
     """merge_sort unit testing"""
     assert merge_sort(test_input) == expected
+
+
+@pytest.mark.parametrize("test_input,expected", expected_values)
+def test_heap_sort(test_input, expected):
+    """heap_sort unit testing"""
+    assert heap_sort(test_input) == expected

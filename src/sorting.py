@@ -135,3 +135,37 @@ def merge_sort(arr: list) -> list:
     left = merge_sort(arr[:mid])
     right = merge_sort(arr[mid:])
     return _combine(left, right)
+
+
+def heap_sort(arr: list) -> list:
+    """Sorts an array using the Heap sort algorithm.
+
+    Time complexity: O(n log n) avg and worst case. Memory: O(1)
+
+    The method builds a max-heap from the array (heapify phase) and then swaps
+    the first element of the array with the last element and rebuilds the heap
+    (sortdown phase) until the array is sorted.
+    """
+
+    def _sink(k, n):
+        """Sink the element at index k in the array of length n"""
+        while 2 * k <= n:
+            j = 2 * k
+            if j < n and arr[j - 1] < arr[j]:
+                j += 1
+            if arr[k - 1] >= arr[j - 1]:
+                break
+            arr[k - 1], arr[j - 1] = arr[j - 1], arr[k - 1]
+            k = j
+
+    n = len(arr)
+
+    # Heapify phase
+    for k in range(n // 2, 0, -1):
+        _sink(k, n)
+
+    # Sortdown phase
+    while n > 1:
+        arr[0], arr[n - 1] = arr[n - 1], arr[0]
+        n -= 1
+        _sink(1, n)
